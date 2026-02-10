@@ -1,106 +1,44 @@
 import { Component, OnInit, signal } from '@angular/core';
-// import { RouterOutlet } from '@angular/router';
+import { defaultThingsToDo, ThingToDo } from './defaultThingsToDo';
 
 @Component({
   selector: 'app-root',
-  // imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App implements OnInit {
-  protected readonly title = signal('decide-for-me');
-
-  private defaultThingsToDo = [
-    {
-      name: 'tft',
-      duration: 'md3, se ganhar continua',
-    },
-    {
-      name: 'dos2',
-      duration: 'ate parar',
-    },
-    {
-      name: 'tabuleiro',
-      duration: 'uma rodada',
-    },
-    {
-      name: 'lego',
-      duration: 'ate acabar',
-    },
-    {
-      name: 'alone',
-      duration: 'ate parar',
-    },
-    {
-      name: 'filme',
-      duration: 'ate acabar',
-    },
-    {
-      name: 'serie',
-      duration: 'um ep',
-    },
-    {
-      name: 'caminhada',
-      duration: 'volta no parque/visitar sogra',
-    },
-    {
-      name: 'leitura',
-      duration: '10m',
-    },
-    {
-      name: 'exercicio',
-      duration: '10m',
-    },
-    {
-      name: 'estudo/todolist',
-      duration: '10m',
-    },
-    {
-      name: 'quebra cabeça',
-      duration: '10m',
-    },
-    {
-      name: 'brincar com as gatas',
-      duration: '5m',
-    },
-    {
-      name: 'arrumar a casa',
-      duration: '5m',
-    },
-  ];
+   thingsToDo = signal<ThingToDo[]>([]);
+   randomThingToDo = signal<ThingToDo | null>(null);
 
   ngOnInit(): void {
-    this.showDefaultThigsToDo();
+    this.thingsToDo.set(defaultThingsToDo);
   }
 
-  private showDefaultThigsToDo() {
-    const list = document.getElementById('things-to-do');
-    this.defaultThingsToDo.forEach((thing) => {
-      this.createThingToDo(thing.name);
-    });
+   createThingToDo(text: string) {
+    const [name, duration] = text.split(',').map((part) => part.trim());
+
+    if (!name || !duration) {
+      alert('Please enter a valid thing to do in the format: "name, duration"');
+      return;
+    }
+    const newThingToDo: ThingToDo = { name, duration };
+    this.thingsToDo.update((things) => [...things, newThingToDo]);
   }
 
-  public createThingToDo(text: string) {
-    const list = document.getElementById('things-to-do');
-    const para = document.createElement('li');
-    const node = document.createTextNode(text);
-    para.appendChild(node);
-    list?.appendChild(para);
+   selectRandomThingToDo() {
+    const randomIndex = Math.floor(Math.random() * defaultThingsToDo.length);
+    this.randomThingToDo.set(this.thingsToDo()[randomIndex]);
   }
 
-  public selectRandomThingToDo() {
-    const randomIndex = Math.floor(Math.random() * this.defaultThingsToDo.length);
-    // const randomThingToDo = this.defaultThingsToDo[randomIndex];
+  log(item: any) {
+    console.log(item);
+  }
 
-    const list = document
-      ?.getElementById('things-to-do')
-      ?.getElementsByTagName('li');
+  private saveOnlocalStorage() {
+    localStorage.setItem('thingsToDo', JSON.stringify(this.thingsToDo()));
+  }
 
-    if (!list) return;
-
-    const randomThingToDo = list[randomIndex].textContent;
-
-    const p = document.getElementById('random-thing-to-do');
-    if (p) p.textContent = `${randomThingToDo}`;
+   deleteThingToDo(thingToDo: ThingToDo) {
+    this.thingsToDo.update((things) => things.filter(t => t !== thingToDo));
   }
 }

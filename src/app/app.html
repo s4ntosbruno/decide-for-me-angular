@@ -1,12 +1,28 @@
 <div class="paper">
   <div class="lines">
     <strong>Decide For Me</strong>
-    <ul id="things-to-do" contenteditable></ul>
+    <ul id="things-to-do">
+      @for (thingToDo of thingsToDo(); track $index) {
+        <li>
+          {{ thingToDo.name }} ({{ thingToDo.duration }})
+          <button class="btn-delete hidden" (click)="deleteThingToDo(thingToDo)">remover</button>
+        </li>
+      }
+      <li>
+        <input type="text" placeholder="texto, duração" #thingInput />
+        <button
+          (click)="createThingToDo(thingInput.value); thingInput.value = ''"
+        >
+          adicionar
+        </button>
+      </li>
+    </ul>
     <br />
-    <button (click)="selectRandomThingToDo()">Decidir</button>
-    <button (click)="createThingToDo('Escreva aqui...')">Novo Item</button>
+    <button (click)="selectRandomThingToDo()">decidir</button>
     <br />
-    <p id="random-thing-to-do"></p>
+    <p id="random-thing-to-do">
+      {{ randomThingToDo()?.name }} {{ randomThingToDo()?.duration }}
+    </p>
   </div>
   <div class="holes">
     <div class="hole"></div>
