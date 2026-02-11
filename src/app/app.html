@@ -1,33 +1,56 @@
 <div class="paper">
   <div class="lines">
     <strong>Decide For Me</strong>
-    <ul id="things-to-do">
-      @for (thingToDo of thingsToDo(); track $index) {
-        <li>
-          {{ thingToDo.name }} ({{ thingToDo.duration }})
-          <button class="btn-delete hidden" (click)="deleteThingToDo(thingToDo)">remover</button>
-        </li>
-      }
-      <li>
-        <input type="text" placeholder="texto, duração" #thingInput />
-        <button
-          (click)="createThingToDo(thingInput.value); thingInput.value = ''"
-        >
-          adicionar
-        </button>
-      </li>
-    </ul>
-    <br />
-    <button (click)="selectRandomThingToDo()">decidir</button>
-    <br />
-    <p id="random-thing-to-do">
-      {{ randomThingToDo()?.name }} {{ randomThingToDo()?.duration }}
-    </p>
-  </div>
-  <div class="holes">
-    <div class="hole"></div>
-    <div class="hole"></div>
-    <div class="hole"></div>
-    <div class="hole"></div>
+    <div class="container">
+      <section>
+        <p>O que fazer?</p>
+        <ul id="things-to-do">
+          @for (thingToDo of thingsToDo(); track $index) {
+            <li>
+              <button
+                class="btn-delete hidden"
+                (click)="deleteThingToDo(thingToDo)"
+              >
+                remover
+              </button>
+              {{ thingToDo.name }} ({{ thingToDo.duration }})
+            </li>
+          }
+          <li>
+            <input type="text" placeholder="texto, duração" #thingInput />
+            <button
+              class="btn-add"
+              (click)="createThingToDo(thingInput.value); thingInput.value = ''"
+            >
+              adicionar
+            </button>
+          </li>
+        </ul>
+
+        <button (click)="selectRandomThingToDo()">decidir</button>
+
+        @if (randomThingToDo()) {
+          <p id="random-thing-to-do">
+            {{ randomThingToDo()?.name }} ({{ randomThingToDo()?.duration }})
+          </p>
+        }
+      </section>
+      <section>
+        <p>histórico</p>
+        <ul id="history">
+          @if (historyOfRandomThingsToDo()) {
+            @for (
+              thingToDo of historyOfRandomThingsToDo()
+                | slice: 0 : thingsToDo().length;
+              track $index
+            ) {
+              <li>
+                {{ thingToDo.name }} ({{ thingToDo.date | date: "medium" }})
+              </li>
+            }
+          }
+        </ul>
+      </section>
+    </div>
   </div>
 </div>

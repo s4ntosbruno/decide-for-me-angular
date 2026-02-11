@@ -58,8 +58,10 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
-1. edição
-2. adição
-3. exclusão
-4. salvar local
+1. edição done
+2. adição done
+3. exclusão done
+4. salvar local 
 5. criar outra lista
+6. histórico de coisas a fazer
+
