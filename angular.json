@@ -27,6 +27,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/decide-for-me-angular/",
               "budgets": [
                 {
                   "type": "initial",

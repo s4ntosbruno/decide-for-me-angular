@@ -61,7 +61,8 @@ For more information on using the Angular CLI, including detailed command refere
 1. edição done
 2. adição done
 3. exclusão done
-4. salvar local 
+4. salvar local done
 5. criar outra lista
 6. histórico de coisas a fazer
+7. publicar git hub
 

@@ -1,5 +1,6 @@
 <div class="paper">
   <div class="lines">
+    <br />
     <strong>Decide For Me</strong>
     <div class="container">
       <section>
@@ -7,13 +8,13 @@
         <ul id="things-to-do">
           @for (thingToDo of thingsToDo(); track $index) {
             <li>
+              {{ thingToDo.name }} ({{ thingToDo.duration }})
               <button
                 class="btn-delete hidden"
                 (click)="deleteThingToDo(thingToDo)"
               >
                 remover
               </button>
-              {{ thingToDo.name }} ({{ thingToDo.duration }})
             </li>
           }
           <li>
@@ -26,9 +27,7 @@
             </button>
           </li>
         </ul>
-
-        <button (click)="selectRandomThingToDo()">decidir</button>
-
+        <button class="btn-decide" (click)="selectRandomThingToDo()">decidir</button>
         @if (randomThingToDo()) {
           <p id="random-thing-to-do">
             {{ randomThingToDo()?.name }} ({{ randomThingToDo()?.duration }})
