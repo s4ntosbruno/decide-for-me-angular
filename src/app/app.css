@@ -93,4 +93,12 @@ button:hover {
     color: red;
     opacity: 0.25;
   }
+  .paper .lines {
+    padding-left: 15px;
+    padding-right: 0px;
+  }
+
+  .paper:before {
+    margin-left: 10px;
+  }
 }
