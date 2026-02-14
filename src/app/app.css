@@ -3,9 +3,7 @@
 .paper {
   font-family: "Patrick Hand", cursive;
   line-height: 25px;
-
   margin: 0 auto;
-  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
   transition:
     transform 0.3s,
     margin 0.3s;
@@ -52,16 +50,16 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  opacity: 1;
+}
+
 ul {
   list-style: katakana;
 }
 
 li:hover .btn-delete {
   opacity: 0.3;
-}
-
-button:hover {
-  opacity: 1 !important;
 }
 
 .btn-add {
@@ -100,5 +98,20 @@ button:hover {
 
   .paper:before {
     margin-left: 10px;
+  }
+
+  .btn-add {
+    opacity: 1;
+  }
+
+  .btn-delete {
+    opacity: 1;
+  }
+
+  .btn-decide {
+    opacity: 1;
+  }
+  button:hover {
+    opacity: 0.5;
   }
 }
