@@ -18,7 +18,7 @@ export class App implements OnInit {
     const thingsToDoFromStorage: ThingToDo[] = JSON.parse(
       localStorage.getItem('thingsToDo') || '[]',
     );
-    this.thingsToDo.set(thingsToDoFromStorage || defaultThingsToDo);
+    this.thingsToDo.set(thingsToDoFromStorage.length > 0 ? thingsToDoFromStorage : defaultThingsToDo);
     const historyOfRandomThingsToDoFromStorage: { name: string; date: Date }[] =
       JSON.parse(localStorage.getItem('historyOfRandomThingsToDo') || '[]');
     this.historyOfRandomThingsToDo.set(
